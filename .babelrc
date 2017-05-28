@@ -1,0 +1,4 @@
+{
+  "presets": ["latest", "react", "next/babel"],
+  "plugins": ["transform-object-rest-spread"]
+}
