@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "node index.js",
+    "dev": "node ./src/index.js",
     "build": "next build",
     "start": "next start",
     "test": "jest --coverage",
@@ -19,7 +19,7 @@
     ]
   },
   "author": "sepiropht",
-  "license": "ISC",
+  "license": "Bona",
   "dependencies": {
     "axios": "^0.16.1",
     "body-parser": "^1.17.1",

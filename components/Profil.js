@@ -1,6 +1,7 @@
 import React from 'react'
 import Router from 'next/router'
 import {connect} from 'react-redux'
+
 class Profil extends React.Component {
   static getInitialProps ({query: {id}}) {
     console.log(id, 'Profil')
