@@ -1,17 +1,17 @@
-import Router from "next/router";
+import Router from 'next/router'
 const handler = id => Router.replace({
-  pathname: "/profil",
-  query: { id: id }
-});
+  pathname: '/profil',
+  query: {id: id}
+})
 const Image = props => {
-  const me = "willo";
-  console.log(props);
+  const me = 'willo'
+  console.log(props)
   return (
     <div>
       <img
-        style={{ maxWidth: "300px", maxHeight: "300px" }}
+        style={{maxWidth: '300px', maxHeight: '300px'}}
         src={props.data.url}
-        alt={"nothing"}
+        alt={'nothing'}
       />
       <h3 className="title">{props.data.title}</h3>
       <div className="footer">
@@ -23,7 +23,7 @@ const Image = props => {
         <div
           className="heart"
           onClick={props.updateLike}
-          style={!props.isUserLike ? { display: "none!important" } : {}}
+          style={!props.isUserLike ? {display: 'none!important'} : {}}
         />
         <span>{props.data.likes.length}</span>
       </div>
@@ -65,7 +65,7 @@ const Image = props => {
         }
       </style>
     </div>
-  );
-};
+  )
+}
 
-export default Image;
+export default Image

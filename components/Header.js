@@ -1,36 +1,36 @@
-import Link from "next/link";
-import { connect } from "react-redux";
-import Modal from "./Modal/modal";
-import Router from "next/router";
+import Link from 'next/link'
+import Router from 'next/router'
+import {connect} from 'react-redux'
+import Modal from './Modal/modal'
 
-const mapStateToProps = state => ({ user: state.User });
+const mapStateToProps = state => ({user: state.User})
 const handler = () => Router.replace({
-  pathname: "/"
-});
-const app = ({ children, user }) => (
+  pathname: '/'
+})
+const app = ({children, user}) => (
   <div className="App">
     <div className="App-header">
-      <h2 style={{ color: "gold" }}>
+      <h2 style={{color: 'gold'}}>
 
         <span onClick={handler}>Welcome to Pinterest-clone</span>
       </h2>
       <h3
-        style={user.logged ? { display: "none" } : { color: "yellow" }}
+        style={user.logged ? {display: 'none'} : {color: 'yellow'}}
         onClick={() => {
-          window.location = "http://sepiropht.freeboxos.fr:3000/login";
+          window.location = 'http://sepiropht.freeboxos.fr:3000/login'
         }}
       >
         Login
       </h3>
       <h3
-        style={!user.logged ? { display: "none" } : {}}
+        style={!user.logged ? {display: 'none'} : {}}
         onClick={() => {
-          window.location = "http://sepiropht.freeboxos.fr:3000/logout";
+          window.location = 'http://sepiropht.freeboxos.fr:3000/logout'
         }}
       >
         Logout
       </h3>
-      <div style={!user.logged ? { display: "none" } : {}}>
+      <div style={!user.logged ? {display: 'none'} : {}}>
         <Modal />
       </div>
 
@@ -101,6 +101,6 @@ const app = ({ children, user }) => (
       }
     </style>
   </div>
-);
-const App = connect(mapStateToProps)(app);
-export default App;
+)
+const App = connect(mapStateToProps)(app)
+export default App
