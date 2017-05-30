@@ -1,7 +1,6 @@
 import User from './reducers/User'
 import {createLogger} from 'redux-logger'
-import {combineReducers} from 'redux'
-import {createStore, applyMiddleware} from 'redux'
+import {createStore, applyMiddleware, combineReducers} from 'redux'
 import {composeWithDevTools} from 'redux-devtools-extension'
 import Images from './reducers/Images'
 import thunk from 'redux-thunk'
