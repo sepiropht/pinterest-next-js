@@ -1,7 +1,7 @@
 const Express = require('express')
 
 const oauth = require('oauth')
-const session = require('cookie-session')
+const session = require('express-session')
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 
@@ -16,13 +16,23 @@ const appNext = next({dev})
 const handle = appNext.getRequestHandler()
 const setupMongoose = require('./config/setup-mongoose')
 const ImageModel = require('./models/image')
+let secretApp
+let token = ''
+
 module.exports = start
 
 async function start () {
   const cleanupMongoose = await setupMongoose()
-  app.use(session({keys: ['foo']}))
   app.use(bodyParser.json())
   app.use(cookieParser())
+  app.use(
+    session({
+      secret: secretApp,
+      cookie: {maxAge: 60000},
+      resave: false,
+      saveUninitialized: false
+    })
+  )
 
   app.use(bodyParser.urlencoded())
   appNext.prepare().then(() => {
@@ -53,6 +63,7 @@ async function start () {
       } else {
         req.session.oauth_token = token
         req.session.oauth_secret = secret
+        secretApp = secret
         res.redirect(
           'https://twitter.com/oauth/authenticate?oauth_token=' + token
         )
@@ -79,7 +90,7 @@ async function start () {
         if (err) {
           res.send('error getting access token: ' + err)
         } else {
-          req.session.username = results.screen_name
+          token = req.session.oauth_token
           UserModel.getUserById(results.user_id, function (err, user) {
             if (err) console.log(err)
             // console.log("user", user);
@@ -89,7 +100,7 @@ async function start () {
               //   payload: results
               // });
               //  console.log(req.query);
-              const resbis = Object.assign(res, {resbis: user})
+              const resbis = Object.assign(res, {resbis: user, token: token})
               const parseUrl = parse(req.url, true)
               appNext.render(req, resbis, '/', parseUrl)
             } else {
@@ -104,7 +115,10 @@ async function start () {
                 // });
                 //    console.log(req.query);
                 const parsedUrl = parse(req.url, true)
-                const resbis = Object.assign(res, {userInfo: results})
+                const resbis = Object.assign(res, {
+                  userInfo: results,
+                  token: token
+                })
                 appNext.render(req, resbis, '/', parsedUrl)
               })
             }
