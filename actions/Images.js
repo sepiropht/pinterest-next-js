@@ -1,8 +1,11 @@
 import fetch from 'isomorphic-fetch'
+import superagentPromise from 'superagent-promise'
+import _superagent from 'superagent'
 export const ADD_IMAGE = 'ADD_IMAGE'
 export const LOAD_IMAGES = 'LOAD_IMAGES'
 export const REMOVE_IMAGE = 'REMOVE_IMAGE'
-
+const url = 'http://sepiropht.freeboxos.fr:3000'
+const superagent = superagentPromise(_superagent, global.Promise)
 export function loadImages (collectionImages) {
   return {
     payload: collectionImages,
@@ -30,35 +33,18 @@ export function removeImage (image) {
 }
 
 export const RECEIVE_POSTS = 'RECEIVE_POSTS'
-function receivePosts (subreddit, json) {
-  return {
-    type: RECEIVE_POSTS,
-    subreddit,
-    posts: json.data.children.map(child => child.data),
-    receivedAt: Date.now()
-  }
-}
 export const updateLike = payload => {
   console.log('pAYLOAD update like', payload)
-  if (!payload || !payload.userId) return
-  let str = []
-  let form = payload
-  Object.keys(form).forEach(key => {
-    str.push(encodeURIComponent(key) + '=' + encodeURIComponent(form[key]))
-  })
-  const body = str.join('&')
-  const req = {
-    method: 'post',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded'
-    },
-    body
+  const tokenPlugin = req => {
+    if (window.localStorage.getItem('jwt')) {
+      req.set('authorization', `Bearer ${window.localStorage.getItem('jwt')}`)
+    }
   }
-  console.log('req', req)
   return dispatch =>
-    fetch('/updateLike', req)
-      .then(response => response.json())
-      .then(json => dispatch(updateImage(json)))
+    superagent
+      .post(url + '/updateLike', payload)
+      .use(tokenPlugin)
+      .then(res => dispatch(updateImage(res.body)))
 }
 export const addRemoteImage = imageInfo => {
   console.log(imageInfo, 'from+user')
