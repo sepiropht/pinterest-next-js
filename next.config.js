@@ -1,7 +1,9 @@
-const trash = require('trash')
+'use strict'
+
+var trash = require('trash')
 
 module.exports = {
-  webpack: config => {
+  webpack: function webpack (config) {
     config.module.rules.push({
       test: /\.css$/,
       use: [
@@ -14,16 +16,16 @@ module.exports = {
         {
           loader: 'skeleton-loader',
           options: {
-            procedure: function (content) {
-              const fileName = `${this._module.userRequest}.json`
-              const classNames = JSON.stringify(require(fileName))
+            procedure: function procedure (content) {
+              var fileName = this._module.userRequest + '.json'
+              var classNames = JSON.stringify(require(fileName))
 
               trash(fileName)
 
               return [
                 'module.exports = {',
-                `classNames: ${classNames},`,
-                `stylesheet: \`${content}\``,
+                'classNames: ' + classNames + ',',
+                'stylesheet: `' + content + '`',
                 '}'
               ].join('')
             }

@@ -33,8 +33,8 @@
     "isomorphic-fetch": "^2.2.1",
     "mongoose": "^4.9.1",
     "nconf": "^0.8.4",
-    "next": "^2.0.0",
-    "next-redux-wrapper": "^1.0.0",
+    "next": "latest",
+    "next-redux-wrapper": "*",
     "oauth": "^0.9.15",
     "passport": "^0.3.2",
     "passport-twitter": "^1.0.4",
@@ -52,7 +52,9 @@
     "redux-form": "^6.6.1",
     "redux-logger": "^3.0.1",
     "redux-thunk": "^2.2.0",
+    "skeleton-loader": "^1.1.3",
     "superagent": "^3.5.2",
+    "superagent-promise": "^1.1.0",
     "trash": "^4.0.1"
   },
   "devDependencies": {
