@@ -1,0 +1,31 @@
+.heart {
+    margin: auto;
+    background-color: pink;
+    height: 15px;
+    width: 15px;
+    transform: rotate(-45deg);
+  }
+  .heart:after {
+    background-color: pink;
+    content: "";
+    border-radius: 50%;
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    top: 0px;
+    left: 7.5px;
+  }
+  .heart:before {
+    content: '';
+    background-color: pink;
+    border-radius: 50%;
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    top: -7.5px;
+    left: 0px;
+  }
+  .heart:hover {
+     transform: scale(2.25);
+
+  }

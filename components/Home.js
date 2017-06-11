@@ -20,7 +20,7 @@ const withConfig = lifecycle({
 const home = props => {
   console.log(props.images, 'IMAGGGGE')
   const ImagesCollection = props.images
-    .filter(image => image.url.length > 0)
+    .filter(image => image.url.indexOf('http') > -1)
     .map((image, index) => (
       <Image
         key={index}
@@ -104,7 +104,9 @@ const home = props => {
             Tiana wearing the <i>robe de style</i> of the 1920’s
           </figcaption>
         </figure>
-        <small>Art © <a href="//clairehummel.com">Claire Hummel</a></small>
+        <small>
+          Art © <a href="http://sepiropht.freeboxos.fr/cms_3wa/">sepiropht</a>
+        </small>
       </div>
     </div>
   )
