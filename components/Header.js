@@ -1,36 +1,43 @@
 import Link from 'next/link'
 import Router from 'next/router'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 import Modal from './Modal/modal'
 
-const mapStateToProps = state => ({user: state.User})
+const mapStateToProps = state => ({ user: state.User })
 const handler = () => Router.replace({
   pathname: '/'
 })
-const app = ({children, user}) => (
+const app = ({ children, user }) => (
   <div className="App">
     <div className="App-header">
-      <h2 style={{color: 'gold'}}>
+      <div className="title">
+        <h2 style={{ color: 'red' }}>
 
-        <span onClick={handler}>Welcome to Pinterest-clone</span>
-      </h2>
+          <span onClick={handler}>lipicture</span>
+        </h2>
+      </div>
+      <div className="profil">
+        <img
+          style={
+            user.logged
+              ? { display: 'none' }
+              : { height: '40px', cursor: 'pointer' }
+          }
+          src="http://www.clker.com/cliparts/e/3/7/2/11949972101916454416kuser.svg.thumb.png"
+          onClick={() => {
+            window.location = 'http://sepiropht.freeboxos.fr:3000/login'
+          }}
+        />
+      </div>
       <h3
-        style={user.logged ? {display: 'none'} : {color: 'yellow'}}
-        onClick={() => {
-          window.location = 'http://sepiropht.freeboxos.fr:3000/login'
-        }}
-      >
-        Login
-      </h3>
-      <h3
-        style={!user.logged ? {display: 'none'} : {}}
+        style={!user.logged ? { display: 'none' } : {}}
         onClick={() => {
           window.location = 'http://sepiropht.freeboxos.fr:3000/logout'
         }}
       >
         Logout
       </h3>
-      <div style={!user.logged ? {display: 'none'} : {}}>
+      <div style={!user.logged ? { display: 'none' } : {}}>
         <Modal />
       </div>
 
@@ -39,22 +46,31 @@ const app = ({children, user}) => (
     <style jsx>
       {
         `
-      .App {
-        text-align: center;
-      }
-
-      .App-logo {
-        animation: App-logo-spin infinite 20s linear;
-        height: 80px;
-      }
 
       .App-header {
-        background-color: #222;
-        height: 150px;
+        background-color: white;
+        height: 60px;
         padding: 20px;
         color: white;
+        position: fixed;
+        top: 0px;
+        left:0px;
+        padding: 12px 16px;
+        width: 100%;
       }
+       .App-header  {
+         display: flex;
+         vertical-align: cneter;
+         border-bottom: 1px solid gray;
 
+       }
+       .title {
+         align-self: flex-start;
+         margin-left: 30px;
+       }
+       .profil {
+         margin-left: 1200px
+       }
       .App-intro {
         font-size: large;
       }
@@ -70,17 +86,7 @@ const app = ({children, user}) => (
         flex-flow: column wrap;
 
       }
-      .footer {
-        background-color: #E8E8E8;
-        width: 90%;
-        margin: auto;
-      }
-      .picture {
-        margin: 10px;
-        max-width: 30px;
-        max-height: 30px;
 
-      }
 
       .profile-picture {
         width: 30px;

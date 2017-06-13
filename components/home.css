@@ -10,7 +10,7 @@ ul li {
   list-style-type: none;
 }
 .columns {
-
+  padding-top: 72px;
 	column-width: 236px;
 	column-gap: 15px;
   width: 90%;
