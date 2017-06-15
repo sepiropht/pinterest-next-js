@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "node ./src/index.js",
     "build": "next build",
-    "start": "next start",
+    "start": "NODE_ENV=production node ./src/index.js",
     "test": "jest --coverage",
     "test:watch": "jest --watch"
   },
