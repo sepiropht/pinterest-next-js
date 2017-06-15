@@ -31,9 +31,10 @@ async function start () {
   passport.use(
     new TwitterStrategy(
       {
-        consumerKey: 'xLwdUeUNl8TMqRV78tWNLSJYr',
-        consumerSecret: 'UwGLUxOQwe0iHLlOnbT45V8JxNGcMdbCsl8w2SF1KP4yao6Gow',
-        callbackURL: 'http://sepiropht.freeboxos.fr:3000' + '/login-callback'
+        consumerKey: process.env.consumerKey,
+        consumerSecret: process.env.consumerSecret,
+        callbackURL: 'http://sepiropht.freeboxos.fr/lipicture' +
+          '/login-callback'
       },
       function (token, tokenSecret, profile, cb) {
         UserModel.getUserById(profile.id, function (err, user) {
