@@ -4,6 +4,9 @@ var trash = require('trash')
 
 module.exports = {
   webpack: function webpack (config) {
+    config.plugins = config.plugins.filter(plugin => {
+      return plugin.constructor.name !== 'UglifyJsPlugin'
+    })
     config.module.rules.push({
       test: /\.css$/,
       use: [
